@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,16 +13,10 @@ namespace gestionearray
         {
             //dichiarazione dell'array
             //numero elementi utilizzati
-            int j = 0;
             int scelta = 0;
+            int dim = 0;
 
-            Console.WriteLine("inserisci numero di elementi ");
-            int ele = int.Parse(Console.ReadLine());
-            Console.WriteLine("inserisci inizio ");
-            int x = int.Parse(Console.ReadLine());
-            Console.WriteLine("inserisci fine ");
-            int y = int.Parse(Console.ReadLine());
-            int[] arr = new int[ele];
+            string[] arr = new string[100];
 
             //stuttura menù
             do
@@ -31,15 +26,15 @@ namespace gestionearray
 
 
                 Console.Clear();
-                Console.WriteLine("1 - Stampa array");
-                Console.WriteLine("2 - Troncamento array");
-                Console.WriteLine("3 - Inserimento elemento nell'array");
-                Console.WriteLine("1 - Stampa array");
-                Console.WriteLine("2 - Troncamento array");
-                Console.WriteLine("3 - Inserimento elemento nell'array");
-                Console.WriteLine("1 - Stampa array");
-                Console.WriteLine("2 - Troncamento array");
-                Console.WriteLine("3 - Inserimento elemento nell'array");
+                Console.WriteLine("1 - Aggiunta di un nome: ");
+                Console.WriteLine("2 - Cancellazione del singolo nome: ");
+                Console.WriteLine("3 - Ordinamento dei nomi: ");
+                Console.WriteLine("4 - Ricerca sequenziale: ");
+                Console.WriteLine("5 - Visualizza nomi ripetuti con numero ripetizioni: ");
+                Console.WriteLine("6 - Modifica di un nome: ");
+                Console.WriteLine("7 - Visualizzazione di tutti i nomi presenti: ");
+                Console.WriteLine("8 - Ricerca del nome più lungo e più corto: ");
+                Console.WriteLine("9 - Cancellazione di tutte le occorrenze di un nome: ");
                 Console.WriteLine("0 - uscita");
                 //scelta dell'opzione
                 Console.WriteLine("inserisci la scelta ");
@@ -51,55 +46,59 @@ namespace gestionearray
                 {
                     case 1:
 
-                        AddArray(arr, ele, x, y, j);
+                        Console.WriteLine("inserisci l'elemento ");
+                        string ele = Console.ReadLine();
 
-                        for (int i = 0; i < ele; i++)
+                        if (AddArray(arr,ref dim,ele) == true)
                         {
-                            Console.WriteLine(arr[i]);
+                            Console.WriteLine("elemnto inserito correttamente");
+                        }
+                        else
+                        {
+                            Console.WriteLine("array pieno");
                         }
 
                         break;
 
-                    case 2:
+                        case 2:
 
-                        Console.WriteLine("inserisci numero di elementi dell'array ");
-                        int num = int.Parse(Console.ReadLine());
 
-                        var array2 = arr;
-                        Array.Resize<int>(ref arr, num);
-
-                        for (int i = 0; i < num; i++)
-                        {
-                            Console.WriteLine("inserisci numero nell'array ");
-                            int a = int.Parse(Console.ReadLine());
-                            arr[i] = a;
-                        }
-
-                        for (int i = 0; i < num; i++)
-                        {
-                            Console.WriteLine(arr[i]);
-                        }
 
                         break;
 
                     case 3:
 
-                        Console.WriteLine("inserisci elemento dell'array ");
-                        int v = int.Parse(Console.ReadLine());
-
-
-                        Console.WriteLine("inserisci la posizione ");
-                        int l = int.Parse(Console.ReadLine());
-
-                        if (l < ele)
+                        for (int i = 0; i < 2; i++)
                         {
-                            Enterarray(arr, v, l);
+                            Console.WriteLine(arr[i]);
                         }
-                        else
-                        {
-                            Console.WriteLine(" La posizione del numero è più grande della grandezza dell'array ");
-                        }
+
                         break;
+
+                    case 4:
+
+                        break;
+
+                    case 5:
+
+                        break;
+
+                    case 6:
+
+                        break;
+
+                    case 7:
+
+                        break;
+
+                    case 8:
+
+                        break;
+
+                    case 9:
+
+                        break;
+
 
                 }
                 Console.ReadLine();
@@ -107,42 +106,49 @@ namespace gestionearray
 
 
         }
-        public static void AddArray(int[] f, int o, int a, int b, int l)
+        public static bool AddArray(string[] a,ref int index, string e)
         {
-            Random random = new Random();
+            
 
-            for (int i = 0; i < o; i++)
+            //controllare se abbiamo raggiunto la dimensione massima
+            bool inserito = true;
+
+            if (index < a.Length)
             {
-                int num1 = random.Next(a, b);
-
-                if (l < o)
-                {
-                    f[l] = num1;
-                    l = l + 1;
-                }
+                //aggiungere l'elemento
+                a[index] = e;
+                //incrementare l'indice
+                index++;
+            }
+            else
+            {
+                inserito = false;
             }
 
-
+            return inserito;
 
         }
 
-        static void Troncamento(int[] a, int p)
+        public static bool Deeletelement(string[] a, ref int index, string e)
         {
-            int[] tronc = new int[p];
 
-            for (int i = 0; i < p; i++)
+
+            //controllare se abbiamo raggiunto la dimensione massima
+            bool inserito = true;
+
+            if (index < a.Length)
             {
-                tronc[i] = a[i];
+                //aggiungere l'elemento
+                a[index] = e;
+                //incrementare l'indice
+                index++;
+            }
+            else
+            {
+                inserito = false;
             }
 
-        }
-
-        static void Enterarray(int[] a, int s, int m)
-        {
-
-
-            a[m] = s;
-
+            return inserito;
 
         }
 
